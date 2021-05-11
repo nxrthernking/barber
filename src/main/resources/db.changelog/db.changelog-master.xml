@@ -10,4 +10,7 @@
 
     <include file="db.changelog/db.changelog-init.xml"/>
     <include file="db.changelog/db.changelog-foreignkey.xml"/>
+    <include file="db.changelog/db.changelog-add-admin.xml"/>
+    <include file="db.changelog/db.changelog-add-haircuts.xml"/>
+    <include file="db.changelog/db.changelog-add-category.xml"/>
 </databaseChangeLog>

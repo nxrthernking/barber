@@ -75,11 +75,11 @@
                 <tbody>
                     <tr th:each="employee : ${employees}">
                         <td th:text="${employee.firstName}"></td>
-                        <td th:text="${employee.secondName}"></td>
+                        <td th:text="${employee.lastName}"></td>
                         <td th:text="${employee.categoryNumber}"></td>
                         <td><a class="btn btn-success" th:href="@{'/orders/add/' + ${employee.id}}">Запись</a></td>
                         <td sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a class="btn btn-info" th:href="@{'/orders/add/' + ${employee.id}}">Инфо</a>
+                            <a class="btn btn-info" th:href="@{'/employees/' + ${employee.id}}">Инфо</a>
                         </td>
                         <td sec:authorize="hasRole('ROLE_ADMIN')">
                             <a class="btn btn-danger" th:href="@{'/employees/delete/' + ${employee.id}}">Удалить</a>

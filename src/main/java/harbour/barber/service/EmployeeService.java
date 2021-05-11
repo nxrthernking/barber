@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,7 +23,7 @@ public class EmployeeService {
     private final EmployeeMapper mapper;
 
     public List<EmployeeDto> getAll(){
-        return employeeRepository.findAll()
+        return employeeRepository.findByActive(true)
                 .stream()
                 .map(mapper::mapToEmployeeDto)
                 .collect(Collectors.toList());
@@ -32,11 +33,14 @@ public class EmployeeService {
         Employee employee = mapper.mapToEmployee(employeeDto);
         Category category = categoryRepository.findByNumber(employeeDto.getCategoryNumber());
         employee.setCategory(category);
+        employee.setActive(true);
         employeeRepository.save(employee);
     }
 
     public void remove(Long id){
-        employeeRepository.deleteById(id);
+        Employee employee = employeeRepository.findById(id).orElseThrow();
+        employee.setActive(false);
+        employeeRepository.save(employee);
     }
 
     public Employee findById(Long id){

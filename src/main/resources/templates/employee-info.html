@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 
@@ -32,10 +34,7 @@
         <div class="list-group list-group-flush">
             <a class="list-group-item list-group-item-action bg-light" href="/employees">Команда</a>
             <a class="list-group-item list-group-item-action bg-light" href="/haircuts">Услуги</a>
-            <a href="/" class="list-group-item list-group-item-action bg-light">Запись</a>
-            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>-->
-            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
-            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
+            <a href="/orders" class="list-group-item list-group-item-action bg-light">Личный кабинет</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -64,16 +63,12 @@
         </nav>
 
         <div class="container-fluid">
-            <form action="#" th:action="@{/orders/add}" th:object="${order}" method="post">
-                <p><b>Услуги</b></p>
-                <p><input type="checkbox" value="Мужская стрижка" th:field="*{haircutName}"/>Мужская стрижка</p>
-                <p><input type="checkbox" value="Детская стрижка"/>Детская стрижка</p>
-                <p><input type="checkbox" value="Стрижка головы и бороды"/>Стрижка головы и бороды</p>
-                <p><input type="checkbox" value="Стрижка усов и бороды"/>Стрижка усов и бороды</p>
-                <input type="datetime-local" th:value="*{date}" th:field="*{date}">
-                <p hidden="hidden"><input type="text" th:value="*{employeeId}" th:field="*{employeeId}" th:text="${order.employeeId}"></p>
-                <p><input type="submit" value="Submit" /></p>
-            </form>
+            <h1>Сотрудник</h1>
+            <p th:text="${employee.firstName}"></p>
+            <p th:text="${employee.secondName}"></p>
+            <p th:text="${employee.lastName}"></p>
+            <p th:text="${employee.phoneNumber}"></p>
+            <p th:text="${employee.passportNumber}"></p>
         </div>
     </div>
     <!-- /#page-content-wrapper -->

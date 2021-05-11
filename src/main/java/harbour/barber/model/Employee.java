@@ -33,6 +33,6 @@ public class Employee {
     @JoinColumn(name = "category_id")
     private Category category;
 
-
+    private boolean active = true;
 
 }
