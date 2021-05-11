@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="11-05-2021" author="Tatyana">
+        <addForeignKeyConstraint baseTableName="user_role_relation"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_user_role"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="user_role_relation"
+                                 baseColumnNames="role_id"
+                                 constraintName="fk_role_user"
+                                 referencedTableName="roles"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="employees"
+                                 baseColumnNames="category_id"
+                                 constraintName="fk_category_employee"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="employee_id"
+                                 constraintName="fk_employee_order"
+                                 referencedTableName="employees"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_user_order"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="haircut_id"
+                                 constraintName="fk_haircut_order"
+                                 referencedTableName="haircut"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

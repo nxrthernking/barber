@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "orders")
+@RequestMapping(value = "/rest/orders")
 public class OrderRestController {
 
     private final OrderService service;
@@ -19,10 +19,10 @@ public class OrderRestController {
         return service.getAll();
     }
 
-    @PostMapping(value = "/add")
-    public void add(@RequestBody Order order){
-        service.add(order);
-    }
+//    @PostMapping(value = "/add")
+//    public void add(@RequestBody Order order){
+//        service.add(order);
+//    }
 
     @DeleteMapping(value = "delete/{id}")
     public void delete(@PathVariable(name = "id") Long id){

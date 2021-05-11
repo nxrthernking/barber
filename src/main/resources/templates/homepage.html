@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Услуги</title>
+    <title>Главная</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,6 +35,9 @@
             <a class="list-group-item list-group-item-action bg-light" href="/employees">Команда</a>
             <a class="list-group-item list-group-item-action bg-light" href="/haircuts">Услуги</a>
             <a href="/orders" class="list-group-item list-group-item-action bg-light">Личный кабинет</a>
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>-->
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -51,43 +54,23 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    <li  class="nav-item active">
+                        <a sec:authorize="isAnonymous()" class="nav-link" href="/register">Регистрация <span class="sr-only">(current)</span></a>
                     </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="/logout">Выход</a>-->
-<!--                    </li>-->
+                    <li sec:authorize="isAuthenticated()" class="nav-item">
+                        <a class="nav-link" href="/logout">Выход</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()" class="nav-item">
+                        <a class="nav-link" href="/login">Вход</a>
+                    </li>
                 </ul>
             </div>
         </nav>
 
         <div class="container-fluid">
-            <h1>Сотрудники</h1>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <td>Имя</td>
-                        <td>Фамилия</td>
-                        <td>Категория</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="employee : ${employees}">
-                        <td th:text="${employee.firstName}"></td>
-                        <td th:text="${employee.secondName}"></td>
-                        <td th:text="${employee.categoryNumber}"></td>
-                        <td><a class="btn btn-success" th:href="@{'/orders/add/' + ${employee.id}}">Запись</a></td>
-                        <td sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a class="btn btn-info" th:href="@{'/orders/add/' + ${employee.id}}">Инфо</a>
-                        </td>
-                        <td sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a class="btn btn-danger" th:href="@{'/employees/delete/' + ${employee.id}}">Удалить</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" th:href="@{/employees/add}">Добавить</a>
+            <h1 class="mt-4">Барбер Шоп Youngboy</h1>
+            <p>Барбершоп YoungBoy – первая в Гомеле парикмахерская для мужчин. Мы открылись 16 ноября 2016 года, собрав к себе в команду лучших мастеров города, и по-прежнему главное наше преимущество — это персонал.</p>
+            <p>Уютный интерьер, дорогое оборудование и инструмент, бесплатный WiFi и кофе — это повторить не так сложно. А вот профессионализм в работе… Хотите быть уверены в качественной стрижке головы или бороды — тогда вам в ЯНГБОЙ! <!--<code>#menu-toggle</code> ID which will toggle the menu when clicked.--></p>
         </div>
     </div>
     <!-- /#page-content-wrapper -->

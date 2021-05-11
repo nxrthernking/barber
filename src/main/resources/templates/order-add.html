@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -34,7 +32,10 @@
         <div class="list-group list-group-flush">
             <a class="list-group-item list-group-item-action bg-light" href="/employees">Команда</a>
             <a class="list-group-item list-group-item-action bg-light" href="/haircuts">Услуги</a>
-            <a href="/orders" class="list-group-item list-group-item-action bg-light">Личный кабинет</a>
+            <a href="/" class="list-group-item list-group-item-action bg-light">Запись</a>
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>-->
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -45,7 +46,8 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <!--        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>-->
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -54,40 +56,25 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="/logout">Выход</a>-->
-<!--                    </li>-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link" href="/logout">Выход</a>-->
+                    <!--                    </li>-->
                 </ul>
             </div>
         </nav>
 
         <div class="container-fluid">
-            <h1>Сотрудники</h1>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <td>Имя</td>
-                        <td>Фамилия</td>
-                        <td>Категория</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="employee : ${employees}">
-                        <td th:text="${employee.firstName}"></td>
-                        <td th:text="${employee.secondName}"></td>
-                        <td th:text="${employee.categoryNumber}"></td>
-                        <td><a class="btn btn-success" th:href="@{'/orders/add/' + ${employee.id}}">Запись</a></td>
-                        <td sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a class="btn btn-info" th:href="@{'/orders/add/' + ${employee.id}}">Инфо</a>
-                        </td>
-                        <td sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a class="btn btn-danger" th:href="@{'/employees/delete/' + ${employee.id}}">Удалить</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" th:href="@{/employees/add}">Добавить</a>
+            <form action="#" th:action="@{/orders/add}" th:object="${order}" method="post">
+                <p><b>Услуги</b></p>
+                <p><input type="checkbox" value="Мужская стрижка" th:field="*{haircutName}"/>Мужская стрижка</p>
+<!--                <p><input type="checkbox" value="kids haircut"/>Детская стрижка</p>
+                <p><input type="checkbox" value="head_and_beard"/>Стрижка головы и бороды</p>
+                <p><input type="checkbox" value="mustache_and_beard"/>Стрижка усов и бороды</p>-->
+<!--                <input type="datetime-local" id="meeting-time"/>-->
+                <input type="datetime-local" th:value="*{date}" th:field="*{date}">
+                <p hidden="hidden"><input type="text" th:value="*{employeeId}" th:field="*{employeeId}" th:text="${order.employeeId}"></p>
+                <p><input type="submit" value="Submit" /></p>
+            </form>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -100,7 +87,7 @@
 
 <!-- Menu Toggle Script -->
 <script>
-    $("#menu-toggle").click(function(e) {
+    $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });

@@ -1,5 +1,6 @@
 package harbour.barber.service;
 
+import harbour.barber.exception.UserException;
 import harbour.barber.mapper.UserMapper;
 import harbour.barber.model.Role;
 import harbour.barber.model.User;
@@ -48,8 +49,12 @@ public class UserService implements UserDetailsService {
     }
 
     public void add(UserDto request){
+        User user = userRepository.findByUsername(request.getUsername());
+        if(user != null){
+            throw new UserException("User already exist");
+        }
         Role role = roleRepository.findByName("ROLE_USER");
-        User user = mapper.mapToUser(request);
+        user = mapper.mapToUser(request);
         user.setRoles(Set.of(role));
         user.setPassword(encoder.encode(request.getPassword()));
         userRepository.save(user);

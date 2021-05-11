@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -10,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Услуги</title>
+    <title>Записи</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,6 +33,9 @@
             <a class="list-group-item list-group-item-action bg-light" href="/employees">Команда</a>
             <a class="list-group-item list-group-item-action bg-light" href="/haircuts">Услуги</a>
             <a href="/orders" class="list-group-item list-group-item-action bg-light">Личный кабинет</a>
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>-->
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -54,40 +55,31 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="/logout">Выход</a>-->
-<!--                    </li>-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link" href="/logout">Выход</a>-->
+                    <!--                    </li>-->
                 </ul>
             </div>
         </nav>
 
         <div class="container-fluid">
-            <h1>Сотрудники</h1>
+<!--            <h1>Сотрудники</h1>-->
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <td>Имя</td>
-                        <td>Фамилия</td>
-                        <td>Категория</td>
-                        <td></td>
-                    </tr>
+                <tr>
+                    <td>Мастер</td>
+                    <td>Дата</td>
+                    <td>Услуга</td>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="employee : ${employees}">
-                        <td th:text="${employee.firstName}"></td>
-                        <td th:text="${employee.secondName}"></td>
-                        <td th:text="${employee.categoryNumber}"></td>
-                        <td><a class="btn btn-success" th:href="@{'/orders/add/' + ${employee.id}}">Запись</a></td>
-                        <td sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a class="btn btn-info" th:href="@{'/orders/add/' + ${employee.id}}">Инфо</a>
-                        </td>
-                        <td sec:authorize="hasRole('ROLE_ADMIN')">
-                            <a class="btn btn-danger" th:href="@{'/employees/delete/' + ${employee.id}}">Удалить</a>
-                        </td>
-                    </tr>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.employee.getFirstName()}"></td>
+                    <td th:text="${order.date}"></td>
+                    <td th:text="${order.haircut.getName()}"></td>
+                </tr>
                 </tbody>
             </table>
-            <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" th:href="@{/employees/add}">Добавить</a>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
