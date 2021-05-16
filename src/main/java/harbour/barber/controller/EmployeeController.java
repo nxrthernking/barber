@@ -25,7 +25,7 @@ public class EmployeeController {
     @Secured(value = "ROLE_ADMIN")
     public String addForm(Model model) {
         model.addAttribute("employee", new EmployeeDto());
-        return "employee-add";
+        return "employee_add";
     }
 
     @PostMapping(value = "/add")

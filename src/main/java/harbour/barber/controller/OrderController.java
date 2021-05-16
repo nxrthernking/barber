@@ -1,7 +1,5 @@
 package harbour.barber.controller;
 
-import harbour.barber.model.Employee;
-import harbour.barber.model.Order;
 import harbour.barber.model.User;
 import harbour.barber.model.dto.OrderDto;
 import harbour.barber.service.EmployeeService;
@@ -40,7 +38,7 @@ public class OrderController {
         OrderDto order = new OrderDto();
         order.setEmployeeId(id);
         model.addAttribute("order", order);
-        return "order-add";
+        return "order_add";
     }
 
     @PostMapping(value = "/add")

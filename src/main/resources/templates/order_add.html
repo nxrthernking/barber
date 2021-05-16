@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <title>Запись</title>
+</head>
+<body>
+<form action="#" th:action="@{/orders/add}" th:object="${order}" method="post">
+    <div class="form-check">
+        <input th:field="*{haircutName}" value="Мужская стрижка" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+        <label class="form-check-label" for="flexRadioDefault1">
+            Мужская стрижка
+        </label>
+    </div>
+    <div class="form-check">
+        <input th:field="*{haircutName}" value="Детская стрижка" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
+        <label class="form-check-label" for="flexRadioDefault2">
+            Детская стрижка
+        </label>
+    </div>
+    <div class="form-check">
+        <input th:field="*{haircutName}" value="Стрижка головы и бороды" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" >
+        <label class="form-check-label" for="flexRadioDefault2">
+            Стрижка головы и бороды
+        </label>
+    </div>
+    <div class="form-check">
+        <input th:field="*{haircutName}" value="Стрижка усов и бороды"  class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" >
+        <label class="form-check-label" for="flexRadioDefault2">
+            Стрижка усов и бороды
+        </label>
+    </div>
+    <p hidden="hidden"><input type="text" th:value="*{employeeId}" th:field="*{employeeId}" th:text="${order.employeeId}"></p>
+    <input type="datetime-local" th:value="*{date}" th:field="*{date}">
+    <p><input type="submit" class="btn btn-success" value="Submit" /></p> <a class="btn btn-info" th:href="@{/}">Назад</a>
+
+</form>
+</body>
+</html>

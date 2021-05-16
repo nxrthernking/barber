@@ -1,19 +1,123 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ЯНГБОЙ</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
 </head>
+
 <body>
-<form action="#" th:action="@{/register}" th:object="${user}" method="post">
-    <p>First name:<input type="text" th:field="*{firstName}" /></p>
-    <p>Last name:<input type="text" th:field="*{lastName}" /></p>
-    <p>Username: <input type="text" th:field="*{username}" /></p>
-    <p>Password:<input type="text" th:field="*{password}" /></p>
-    <p>Phone number:<input type="text" th:field="*{phoneNumber}" /></p>
-    <p>
-        <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
-    </p>
-</form>
+
+<!--https://bootstrapmade.com/demo/EstateAgency/-->
+
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading"><a class="btn btn-info" th:href="@{/}">Youngboy</a></div>
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action bg-light" href="/employees">Команда</a>
+            <a class="list-group-item list-group-item-action bg-light" href="/haircuts">Услуги</a>
+            <a href="/orders" class="list-group-item list-group-item-action bg-light">Личный кабинет</a>
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>-->
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>-->
+            <!--        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>-->
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <!--        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>-->
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <!--            <li class="nav-item active">-->
+                    <!--              <a class="nav-link" href="/">Регистрация<span class="sr-only">(current)</span></a>-->
+                    <!--            </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout" sec:authorize="hasRole('ROLE_USER')">Выход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Вход</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+<!--            <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+                <p>First name:<input type="text" th:field="*{firstName}" /></p>
+                <p>Last name:<input type="text" th:field="*{lastName}" /></p>
+                <p>Username: <input type="text" th:field="*{username}" /></p>
+                <p>Password:<input type="text" th:field="*{password}" /></p>
+                <p>Phone number:<input type="text" th:field="*{phoneNumber}" /></p>
+                <p>
+                    <input type="submit" value="Submit"/> <input type="reset" value="Reset"/>
+                </p>
+            </form>-->
+            <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">First name</label>
+                    <input th:field="*{firstName}" type="text" class="form-control" id="formGroupExampleInput" placeholder="First name">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Last name</label>
+                    <input th:field="*{lastName}" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Last name">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput3">Username</label>
+                    <input th:field="*{username}" type="text" class="form-control" id="formGroupExampleInput3" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput4">Password</label>
+                    <input th:field="*{password}" type="text" class="form-control" id="formGroupExampleInput4" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput4">Phone number</label>
+                    <input th:field="*{phoneNumber}" type="text" class="form-control" id="formGroupExampleInput5" placeholder="Phone number">
+                </div>
+                <div>
+                    <input class="btn btn-success" type="submit" value="Submit"/> <input class="btn btn-primary"  type="reset" value="Reset">
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
 </body>
+
 </html>
